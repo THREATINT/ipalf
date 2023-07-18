@@ -63,3 +63,4 @@ for feedback and general requests. Kindly raise an issue in GitHub if you find a
 Release under the MIT License. (see LICENSE)
 
 ## QA
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/66848a309a7f41fa96f1922e248b8785)](https://app.codacy.com/gh/THREATINT/ipalf/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
