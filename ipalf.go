@@ -43,6 +43,7 @@ func main() {
 			},
 		},
 
+		// skipcq: CRT-A0018
 		Action: func(cCtx *cli.Context) error {
 			return run(cCtx)
 		},
