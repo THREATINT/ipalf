@@ -1,50 +1,40 @@
 # ipalf
-IP Address List Filter
+**IP** **A**ddress **L**ist **F**ilter
 
 ## Introduction
-This command line utility take a list containing ip addresses and/or networks / subnets
-from Stdin and prints out an aggregated list to Stdout.
-The resulting (aggregated) list no longer contains ip addresses that are part of a network that 
-is on the same list. The same goes for networks / subnets that are contained in a larger network / subnet
-
-Both IPv4 and IPv6 are supported. 
+This command line utility take a list of ip addresses and/or networks / subnets from `stdin`
+and filters for IPv4 and/or IPv6 addresses, single ips or networks.
+Please use a combination of the following flags to allow these entries:
+- `--ipv4`
+- `--ipv6`
+- `--network`
+- `--singleip`
 
 IP networks / subnets need to be in CIDR notation 
 (please see [RFC2317](https://www.rfc-editor.org/rfc/rfc2317.html)).
 
+## Usage
+Let's jump into an example:
+
+A file `example.txt` contains the following lines:
+```csv
+10.1.0.1
+10.1.0.0/16
+```
+If you `cat example.txt | ipalf --networks --ipv4` you get the following list:
+```csv
+10.1.0.0/16
+```
+The single ip addresses `10.1.0.1` is gone.
+
 ## Building and dependencies
-ipala is written in Go (Golang), Go SDK v1.20+ is required.
+ipalf is written in Go (Golang), Go SDK v1.20+ is required.
 You can either run `go build` or go for a platform build:
 - `make amd64` for x86_64
 - `make arm64` for arm64
 
-## Usage
-Let's jump into an example:
-
-The file `example.txt` (part of this repository) contains the following lines:
-```csv
-10.1.1.1
-10.1.1.0/24
-10.1.0.0/16
-192.168.1.0/24
-192.168.2.0/24
-192.168.1.1
-192.168.2.1
-192.168.3.1
-```
-If you `cat example.txt | ipala` you get the following list:
-```csv
-10.1.0.0/16
-192.168.1.0/24
-192.168.2.0/24
-192.168.3.1
-```
-All three single ip addresses `10.1.1.1`, `192.168.1.1`, and `192.168.2.1` that are part of a network 
-that is also listed are gone, so is the network / subnet `10.1.1.1.0/24` that is part of the larger 
-network / subnet `10.1.0.0/16`. 
-
 ## FAQ
-- **Does it have to be a tool of its own? Isn't it easier and more flexible to use regex and a small script to achieve the same results?** 
+- **Do we really need a new tool? Isn't it easier and more flexible to use regex and a small script to achieve the same results?** 
 Yes and no. Regex (regular expressions) may work in most cases, but things get a bit messy when
 it comes to debugging or when you have to deal with ip addresses in CIDR notation (`/32` for IPv4, `/128` for IPv6),
 - **Where is this tool used?**
