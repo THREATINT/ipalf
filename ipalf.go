@@ -81,7 +81,7 @@ func run(cCtx *cli.Context) error {
 		return scanner.Err()
 	}
 
-	for _, line = range &lines {
+	for _, line = range lines {
 		var (
 			ipAddrTest string
 			ipAddr     netip.Addr
